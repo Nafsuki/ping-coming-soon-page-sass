@@ -1,40 +1,6 @@
-@import url('https://fonts.googleapis.com/css2?family=Libre+Franklin:wght@300;600;700&display=swap');
-$blue: hsl(223, 87%, 63%);
-$pale-blue: hsl(223, 100%, 88%);
-$light-red: hsl(354, 100%, 66%);
-$gray: hsl(0, 0%, 59%);
-$very-dark-blue: hsl(209, 33%, 12%);
-$font-family: 'Libre Franklin', sans-serif;
-
-// Mixins
-@mixin flexcenter {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-@mixin labelShrink {
-  top: 3.3rem;
-  left: 0.5rem;
-  font-size: 1rem;
-  background-color: #fff;
-}
-
-@mixin respond($breakpoint) {
-  @if $breakpoint==tablet {
-    @media (max-width: 900px) {
-      @content;
-    }
-  }
-  @if $breakpoint==mobile {
-    @media (max-width: 600px) {
-      @content;
-    }
-  }
-}
+@import 'config';
 
 // GENERAL SETTINGS
-
 * {
   box-sizing: border-box;
 }
@@ -47,6 +13,7 @@ body {
   font-size: 2rem;
   font-family: $font-family;
   padding: 0;
+  min-height: 100vh;
   @include flexcenter;
   flex-direction: column;
   color: $very-dark-blue;
@@ -54,29 +21,27 @@ body {
 }
 
 // MAIN CONTENTS
-header {
-  @include flexcenter;
-  flex-direction: column;
-  .logo {
-    width: 8rem;
+.logo {
+  width: 10rem;
+}
+h1 {
+  margin: 5.5rem 0 0;
+  letter-spacing: 0.2rem;
+  padding: 0;
+  color: $gray;
+  font-weight: 300;
+  font-size: 4.5rem;
+  span {
+    color: $very-dark-blue;
+    font-weight: 700;
   }
-  h1 {
-    margin: 5.5rem 0 0;
-    padding: 0;
-    color: $gray;
-    font-weight: 300;
-    font-size: 4.5rem;
-    span {
-      color: $very-dark-blue;
-      font-weight: 700;
-    }
-  }
-  h2 {
-    font-weight: 300;
-    margin: 2rem 0 0;
-    padding: 0;
-    font-size: 2rem;
-  }
+}
+h2 {
+  font-weight: 300;
+  margin: 2rem 0 0;
+  padding: 0;
+  font-size: 2rem;
+  line-height: 3rem;
 }
 
 .form {
@@ -88,19 +53,15 @@ header {
     flex-direction: column;
     position: relative;
     input {
-      &:not(:placeholder-shown).input:not(:focus) ~ label {
-        @include labelShrink();
-      }
       width: 42rem;
       height: 6rem;
       padding: 0 3rem;
       border: 0.1rem solid $pale-blue;
-      border-radius: 3rem;
-      font-size: 1.8rem;
+      border-radius: $radius;
+      font-size: 1.6rem;
       color: $very-dark-blue;
       font-weight: 300;
       cursor: text;
-
       &:hover {
         background-color: #fbfcff;
         border: 0.1rem solid $blue;
@@ -108,7 +69,6 @@ header {
           background-color: #fbfcff;
         }
       }
-
       &:focus {
         outline: none;
         border: 0.2rem solid $blue;
@@ -117,14 +77,16 @@ header {
           @include labelShrink;
         }
       }
+      &:not(:placeholder-shown).input:not(:focus) ~ label {
+        @include labelShrink();
+      }
     }
-
     label {
       position: absolute;
       left: -0.2rem;
       padding: 0 0.2rem;
       top: 6rem;
-      font-size: 1.8rem;
+      font-size: 1.6rem;
       margin: -4rem 3rem 0;
       cursor: text;
       color: $pale-blue;
@@ -158,8 +120,8 @@ header {
 button {
   width: 20rem;
   height: 6rem;
-  border-radius: 3rem;
-  font-size: 1.8rem;
+  border-radius: $radius;
+  font-size: 1.6rem;
   font-family: $font-family;
   color: #fff;
   background-color: $blue;
@@ -182,6 +144,7 @@ button {
   margin: 6.5rem 0 0;
   width: 64rem;
 }
+
 .sns-icons {
   margin: 6.5rem 0 0;
   width: 12rem;
@@ -212,60 +175,11 @@ button {
     }
   }
 }
+
 .copyright {
   font-size: 1.2rem;
   margin: 2.5rem 0 0;
   color: $gray;
 }
 
-@media (max-width: 900px) {
-  .form {
-    flex-direction: column;
-    .form-control {
-      input {
-        width: 60vw;
-      }
-    }
-    button {
-      margin: 1rem 0 0;
-      width: 100%;
-    }
-  }
-  .dashboard {
-    width: 56rem;
-  }
-}
-
-@media (max-width: 600px) {
-  h1 {
-    font-size: 2.5rem;
-  }
-  h2 {
-    font-size: 1.6rem;
-  }
-  .form {
-    .form-control {
-      input {
-        width: 28rem;
-        height: 4rem;
-        font-size: 1.6rem;
-      }
-      label {
-        top: 5rem;
-        font-size: 1.6rem;
-      }
-      small {
-        font-size: 1.2rem;
-        margin: 0.5rem 0 0;
-      }
-    }
-    button {
-      width: 28rem;
-      height: 4rem;
-      font-size: 1.6rem;
-    }
-  }
-  .dashboard {
-    width: 30rem;
-  }
-}
+@import 'media';

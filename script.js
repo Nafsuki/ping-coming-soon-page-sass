@@ -2,7 +2,6 @@ const form = document.getElementById('form');
 const formControl = document.getElementById('form-control');
 const email = document.getElementById('email');
 const small = formControl.querySelector('small');
-const label = formControl.querySelector('label');
 
 // Show input error message
 const showError = (input, message) => {
