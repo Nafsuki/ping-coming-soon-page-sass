@@ -9,18 +9,19 @@
   <title>Frontend Mentor | Ping coming soon page</title>
 </head>
 <body>
-  <div class="container">
+  <header>
     <img class='logo' src="./dist/css/images/logo.svg" alt="logo">
     <h1>We are launching <span>soon!</span></h1>
-    <h3>Subscribe and get notified</h3>
+    <h2>Subscribe and get notified</h2>
+  </header>
     <form id='form' class="form">
       <div id='form-control' class="form-control">
-      <input id='email' type="email" aria-label="email" placeholder="Your email address...">
+      <input class="input" id='email' type="email" aria-label="email" autocomplete="off" placeholder=" ">
+      <label for='email' class='label'>Your email address...</label>
       <small>Error message</small>
       </div>
       <button id='btn' type="submit" aria-label="submit">Notify Me</button>
     </form>
-    
     <img class='dashboard' src="./dist/css/images/illustration-dashboard.png" alt="illustration-dashboard">
     <div class="sns-icons">
       <div class="facebook">
@@ -34,7 +35,7 @@
       </div>
     </div>
     <p class="copyright">&copy; Copyright Ping. All rights reserved.</p>
-  </div>
+ 
 
   <script src="./script.js"></script>
 </body>

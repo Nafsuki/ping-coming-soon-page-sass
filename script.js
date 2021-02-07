@@ -2,6 +2,7 @@ const form = document.getElementById('form');
 const formControl = document.getElementById('form-control');
 const email = document.getElementById('email');
 const small = formControl.querySelector('small');
+const label = formControl.querySelector('label');
 
 // Show input error message
 const showError = (input, message) => {
@@ -11,8 +12,7 @@ const showError = (input, message) => {
 
 // Show success outline
 const showSuccess = (input) => {
-  formControl.className = 'form-control success'
-  
+  formControl.className = 'form-control success';
 }
 
 // Check email is valid 

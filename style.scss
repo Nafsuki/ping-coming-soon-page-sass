@@ -6,6 +6,33 @@ $gray: hsl(0, 0%, 59%);
 $very-dark-blue: hsl(209, 33%, 12%);
 $font-family: 'Libre Franklin', sans-serif;
 
+// Mixins
+@mixin flexcenter {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+@mixin labelShrink {
+  top: 3.3rem;
+  left: 0.5rem;
+  font-size: 1rem;
+  background-color: #fff;
+}
+
+@mixin respond($breakpoint) {
+  @if $breakpoint==tablet {
+    @media (max-width: 900px) {
+      @content;
+    }
+  }
+  @if $breakpoint==mobile {
+    @media (max-width: 600px) {
+      @content;
+    }
+  }
+}
+
 // GENERAL SETTINGS
 
 * {
@@ -19,27 +46,21 @@ html {
 body {
   font-size: 2rem;
   font-family: $font-family;
-  margin: 0;
   padding: 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  @include flexcenter;
+  flex-direction: column;
   color: $very-dark-blue;
+  margin: 8.5rem 0;
 }
 
 // MAIN CONTENTS
-.container {
-  display: flex;
+header {
+  @include flexcenter;
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  margin: 8.5rem 0;
   .logo {
     width: 8rem;
-    // border: 1px solid red;
   }
   h1 {
-    // border: 1px solid red;
     margin: 5.5rem 0 0;
     padding: 0;
     color: $gray;
@@ -50,176 +71,201 @@ body {
       font-weight: 700;
     }
   }
-  h3 {
+  h2 {
     font-weight: 300;
     margin: 2rem 0 0;
     padding: 0;
     font-size: 2rem;
   }
-  .form {
-    // border: 1px solid red;
-    margin: 3.8rem 0 0;
+}
+
+.form {
+  margin: 3.8rem 0 0;
+  display: flex;
+  justify-content: center;
+  .form-control {
     display: flex;
-    justify-content: center;
-    .form-control {
-      display: flex;
-      flex-direction: column;
-      input {
-        width: 42rem;
-        height: 6rem;
-        padding: 0 3rem;
-        border: 1px solid $pale-blue;
-        border-radius: 3rem;
-        font-size: 1.8rem;
-        cursor: pointer;
-        &:focus {
-          outline: none;
-        }
+    flex-direction: column;
+    position: relative;
+    input {
+      &:not(:placeholder-shown).input:not(:focus) ~ label {
+        @include labelShrink();
       }
-      ::placeholder {
-        color: $pale-blue;
-        font-size: 1.8rem;
-      }
-      small {
-        font-style: italic;
-        color: $light-red;
-        display: inline-block;
-        margin: 1rem 0 0;
-        padding: 0 3rem;
-        // border: 1px solid red;
-        visibility: hidden;
-      }
-      &.error {
-        input {
-          border-color: $light-red;
-        }
-        small {
-          visibility: visible;
-        }
-      }
-      &.success {
-        input {
-          border-color: lightgreen;
-        }
-      }
-    }
-    button {
-      width: 20rem;
+      width: 42rem;
       height: 6rem;
+      padding: 0 3rem;
+      border: 0.1rem solid $pale-blue;
       border-radius: 3rem;
       font-size: 1.8rem;
-      color: #fff;
-      background-color: $blue;
-      border: none;
-      cursor: pointer;
-      margin-left: 1.5rem;
-      box-shadow: 0 0.5rem 1rem 0.5rem rgba(79, 125, 243, 0.2);
-      transition: all 0.3s ease-in-out;
-      &:focus {
-        outline: none;
-      }
+      color: $very-dark-blue;
+      font-weight: 300;
+      cursor: text;
+
       &:hover {
-        background-color: #fff;
-        color: $blue;
-        border: 0.2rem solid $blue;
-      }
-    }
-  }
-  .dashboard {
-    margin: 6.5rem 0 0;
-    width: 64rem;
-  }
-  .sns-icons {
-    // border: 1px solid red;
-    margin: 6.5rem 0 0;
-    width: 12rem;
-    height: 3rem;
-    display: flex;
-    justify-content: space-between;
-    .facebook,
-    .twitter,
-    .instagram {
-      fill: $blue;
-      width: 3rem;
-      height: 3rem;
-      border-radius: 50%;
-      border: 1px solid $pale-blue;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      cursor: pointer;
-      transition: all 0.3s ease-in-out;
-      &:hover {
-        background-color: $blue;
-        border: 1px solid $blue;
-        svg {
-          fill: #fff;
+        background-color: #fbfcff;
+        border: 0.1rem solid $blue;
+        & ~ label {
+          background-color: #fbfcff;
         }
       }
-      svg {
-        width: 1.4rem;
-        height: 1.4rem;
+
+      &:focus {
+        outline: none;
+        border: 0.2rem solid $blue;
+        background-color: #fff;
+        & ~ label {
+          @include labelShrink;
+        }
       }
     }
-  }
-  .copyright {
-    font-size: 1.2rem;
-    margin: 2.5rem 0 0;
-    color: $gray;
+
+    label {
+      position: absolute;
+      left: -0.2rem;
+      padding: 0 0.2rem;
+      top: 6rem;
+      font-size: 1.8rem;
+      margin: -4rem 3rem 0;
+      cursor: text;
+      color: $pale-blue;
+      transition: top 200ms ease-in, left 200ms ease-in, font-size 200ms ease-in;
+      background-color: #fff;
+    }
+    small {
+      font-style: italic;
+      color: $light-red;
+      display: inline-block;
+      margin: 1rem 0 0;
+      padding: 0 3rem;
+      visibility: hidden;
+    }
+    &.error {
+      input {
+        border-color: $light-red;
+      }
+      small {
+        visibility: visible;
+      }
+    }
+    &.success {
+      input {
+        border-color: #45cc70;
+      }
+    }
   }
 }
 
+button {
+  width: 20rem;
+  height: 6rem;
+  border-radius: 3rem;
+  font-size: 1.8rem;
+  font-family: $font-family;
+  color: #fff;
+  background-color: $blue;
+  border: none;
+  cursor: pointer;
+  margin-left: 1.5rem;
+  box-shadow: 0 0.5rem 1rem 0.5rem rgba(79, 125, 243, 0.2);
+  transition: all 0.3s ease-in-out;
+  &:focus {
+    outline: none;
+  }
+  &:hover {
+    background-color: #fff;
+    color: $blue;
+    border: 0.2rem solid $blue;
+  }
+}
+
+.dashboard {
+  margin: 6.5rem 0 0;
+  width: 64rem;
+}
+.sns-icons {
+  margin: 6.5rem 0 0;
+  width: 12rem;
+  height: 3rem;
+  display: flex;
+  justify-content: space-between;
+  .facebook,
+  .twitter,
+  .instagram {
+    fill: $blue;
+    width: 3rem;
+    height: 3rem;
+    border-radius: 50%;
+    border: 1px solid $pale-blue;
+    @include flexcenter;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+    &:hover {
+      background-color: $blue;
+      border: 1px solid $blue;
+      svg {
+        fill: #fff;
+      }
+    }
+    svg {
+      width: 1.4rem;
+      height: 1.4rem;
+    }
+  }
+}
+.copyright {
+  font-size: 1.2rem;
+  margin: 2.5rem 0 0;
+  color: $gray;
+}
+
 @media (max-width: 900px) {
-  .container {
-    .form {
-      flex-direction: column;
-      .form-control {
-        input {
-          width: 60vw;
-        }
-      }
-      button {
-        margin: 1rem 0 0;
-        width: 100%;
+  .form {
+    flex-direction: column;
+    .form-control {
+      input {
+        width: 60vw;
       }
     }
-    .dashboard {
-      width: 56rem;
+    button {
+      margin: 1rem 0 0;
+      width: 100%;
     }
+  }
+  .dashboard {
+    width: 56rem;
   }
 }
 
 @media (max-width: 600px) {
-  .container {
-    h1 {
-      font-size: 2.5rem;
-    }
-    h3 {
-      font-size: 1.6rem;
-    }
-    .form {
-      .form-control {
-        input {
-          width: 28rem;
-          height: 4rem;
-          font-size: 1.6rem;
-        }
-        ::placeholder {
-          font-size: 1.6rem;
-        }
-        small {
-          font-size: 1.2rem;
-          margin: 0.5rem 0 0;
-        }
-      }
-      button {
+  h1 {
+    font-size: 2.5rem;
+  }
+  h2 {
+    font-size: 1.6rem;
+  }
+  .form {
+    .form-control {
+      input {
         width: 28rem;
         height: 4rem;
         font-size: 1.6rem;
       }
+      label {
+        top: 5rem;
+        font-size: 1.6rem;
+      }
+      small {
+        font-size: 1.2rem;
+        margin: 0.5rem 0 0;
+      }
     }
-    .dashboard {
-      width: 30rem;
+    button {
+      width: 28rem;
+      height: 4rem;
+      font-size: 1.6rem;
     }
+  }
+  .dashboard {
+    width: 30rem;
   }
 }
