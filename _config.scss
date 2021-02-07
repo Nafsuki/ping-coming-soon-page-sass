@@ -42,7 +42,7 @@ $radius: 3rem;
     }
   }
   @if $breakpoint == mobileXs {
-    @media (max-width: 280px) {
+    @media (max-width: 350px) {
       @content;
     }
   }

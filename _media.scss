@@ -1,49 +1,134 @@
-@media (max-width: 900px) {
-  .logo {
+@import 'config';
+
+.logo {
+  @include respond(tablet) {
     width: 8rem;
-  }
-  .form {
-    flex-direction: column;
-    .form-control {
-      input {
-        width: 60vw;
-      }
-    }
-    button {
-      margin: 1rem 0 0;
-      width: 100%;
-    }
-  }
-  .dashboard {
-    width: 56rem;
   }
 }
 
-@media (max-width: 600px) {
-  h1 {
+h1 {
+  @include respond(tablet) {
+    text-align: center;
+  }
+  @include respond(mobile) {
     font-size: 2.5rem;
   }
-  h2 {
+  @include respond(mobileXs) {
+    font-size: 2.3rem;
+  }
+}
+
+h2 {
+  @include respond(mobile) {
     font-size: 1.6rem;
   }
-  .form {
-    .form-control {
-      input {
+}
+
+.form {
+  @include respond(tablet) {
+    flex-direction: column;
+  }
+  .form-control {
+    input {
+      @include respond(tablet) {
+        width: 60vw;
+      }
+      @include respond(mobile) {
         @include styleMobile;
       }
-      label {
+      @include respond(mobileXs) {
+        width: 80vw;
+        margin: 0 auto;
+      }
+    }
+    label {
+      @include respond(mobile) {
         top: 5rem;
       }
-      small {
+    }
+    small {
+      @include respond(mobile) {
         font-size: 1.2rem;
         margin: 0.5rem 0 0;
+      }
+      @include respond(mobileXs) {
+        margin: 0.5rem 0;
       }
     }
   }
   button {
-    @include styleMobile;
-  }
-  .dashboard {
-    width: 30rem;
+    @include respond(tablet) {
+      margin: 1rem 0 0;
+      width: 100%;
+    }
+    @include respond(mobile) {
+      @include styleMobile;
+    }
+    @include respond(mobileXs) {
+      width: 80vw;
+      margin: 0 auto;
+    }
   }
 }
+
+.dashboard {
+  @include respond(tablet) {
+    width: 56rem;
+  }
+  @include respond(mobile) {
+    width: 30rem;
+  }
+  @include respond(mobileXs) {
+    width: 90vw;
+  }
+}
+
+// @media (max-width: 900px) {
+//   .logo {
+//     width: 8rem;
+//   }
+//   .form {
+//     flex-direction: column;
+//     .form-control {
+//       input {
+//         width: 60vw;
+//       }
+//     }
+//     button {
+//       margin: 1rem 0 0;
+//       width: 100%;
+//     }
+//   }
+//   .dashboard {
+//     width: 56rem;
+//   }
+// }
+
+// @media (max-width: 600px) {
+//   h1 {
+//     font-size: 2.5rem;
+//   }
+//   h2 {
+//     font-size: 1.6rem;
+//   }
+//   .form {
+//     .form-control {
+//       input {
+//         @include styleMobile;
+//       }
+//       label {
+//         top: 5rem;
+//       }
+//       small {
+//         font-size: 1.2rem;
+//         margin: 0.5rem 0 0;
+//       }
+//     }
+//   }
+//   button {
+//     @include styleMobile;
+//   }
+//   .dashboard {
+//     width: 30rem;
+//   }
+// }
